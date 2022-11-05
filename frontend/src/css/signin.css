@@ -1,0 +1,43 @@
+.google-signin {
+    border: 2px solid red;
+    align-items: center;
+}
+
+.signin-container {
+    margin: 2rem;
+}
+
+.css-binzgt {
+    margin-top: unset !important;
+}
+
+.css-nzinn5-MuiContainer-root {
+    max-width: 50rem !important;
+    margin-left: unset !important;
+
+}
+
+.signin-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 2rem;
+}
+
+.text-field-container {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 1rem;
+    padding-top: 2rem;
+}
+
+label,
+span {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+button {
+    margin: unset !important;
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #5038ee !important;
+    line-height: 3.75rem !important;
+}
