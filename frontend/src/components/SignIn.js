@@ -11,7 +11,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import '../css/signin.css'
+import "../css/signin.css";
 
 const theme = createTheme();
 
@@ -27,7 +27,7 @@ const SignIn = () => {
     var userData = jwt_decode(response.credential);
     console.log(userData);
     setUser(userData);
-    document.getElementById("signInDiv ").hidden = true
+    document.getElementById("signInDiv ").hidden = true;
   }
 
   // function handleLogOut(event) {
@@ -40,13 +40,13 @@ const SignIn = () => {
     google.accounts.id.initialize({
       client_id:
         "324311124286-g39mk6mka2n74f8rgi3uu2c0njm4h13o.apps.googleusercontent.com",
-      callback: handleCallbackResponse
+      callback: handleCallbackResponse,
     });
 
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large" }
-    );
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
     google.accounts.id.prompt();
   });
 
@@ -55,7 +55,6 @@ const SignIn = () => {
   //   if(data!==undefined) setIsLoggedIn(JSON.parse(data))
   //   console.log(data)
   // },[])
-
 
   // useEffect(()=>{
   //   window.localStorage.setItem('logged_in_key',JSON.stringify(isLoggedIn));
@@ -80,7 +79,7 @@ const SignIn = () => {
       alert("invalid email");
     }
     axios
-      .post("http://localhost:5000/login", {
+      .post("https://azure-flask-nile.azurewebsites.net/login", {
         email: data.get("email"),
         password: data.get("password"),
       })
@@ -113,8 +112,8 @@ const SignIn = () => {
       alert("Login successful");
       window.localStorage.setItem("isLoggedIn", true);
       window.localStorage.setItem("role", response["role"]);
-      window.localStorage.setItem("email",response["username"]);
-      navigate('/landing-page');
+      window.localStorage.setItem("email", response["username"]);
+      navigate("/landing-page");
     } else {
       alert("OTP is wrong");
     }
@@ -124,84 +123,84 @@ const SignIn = () => {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className="signin-container">{!isLoggedIn && (<Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div className="signin-title">
-            Sign in
-          </div>
-          <div className="text-field-container">
+        <div className="signin-container">
+          {!isLoggedIn && (
             <Box
-            component="form"
-            onSubmit={otpButton ? validateOtp : handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            Email
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            Password
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            {otpButton ? (
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="otp"
-                label="OTP"
-                type="otp"
-                id="otp"
-                autoComplete="otp"
-              />
-            ) : (
-              <p></p>
-            )}
-            {otpButton ? (
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Validate OTP
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-            )}
-            {/* <div>You can also SignIn using Google account</div>
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <div className="signin-title">Sign in</div>
+              <div className="text-field-container">
+                <Box
+                  component="form"
+                  onSubmit={otpButton ? validateOtp : handleSubmit}
+                  noValidate
+                  sx={{ mt: 1 }}
+                >
+                  Email
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                  Password
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  {otpButton ? (
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="otp"
+                      label="OTP"
+                      type="otp"
+                      id="otp"
+                      autoComplete="otp"
+                    />
+                  ) : (
+                    <p></p>
+                  )}
+                  {otpButton ? (
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                    >
+                      Validate OTP
+                    </Button>
+                  ) : (
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                    >
+                      Sign In
+                    </Button>
+                  )}
+                  {/* <div>You can also SignIn using Google account</div>
             <Grid container>
               <Grid item xs>
                 <Link href="forgotPassword" variant="body2">
@@ -228,9 +227,10 @@ const SignIn = () => {
                   </div>
                 }
             </Grid> */}
-          </Box>
-          </div>
-        </Box>)}
+                </Box>
+              </div>
+            </Box>
+          )}
         </div>
       </Container>
     </ThemeProvider>

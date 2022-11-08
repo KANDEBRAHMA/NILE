@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
-import '../css/signup.css'
+import "../css/signup.css";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function SignUp() {
       answer: data.get("securityAnswer"),
     });
     axios
-      .post("http://localhost:5000/register", {
+      .post("https://azure-flask-nile.azurewebsites.net/register", {
         email: data.get("email"),
         password: data.get("password"),
         firstname: data.get("firstName"),
@@ -77,15 +77,8 @@ export default function SignUp() {
           alignItems: "center",
         }}
       >
-        <div className="signup-title">
-          Sign up
-        </div>
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 3 }}
-        >
+        <div className="signup-title">Sign up</div>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -151,9 +144,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Questions
-                </InputLabel>
+                <InputLabel id="demo-simple-select-label">Questions</InputLabel>
                 <Select
                   defaultValue="User"
                   labelId="demo-simple-select-questions"
@@ -192,9 +183,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 required
-                control={
-                  <Checkbox value="allowExtraEmails" color="primary" />
-                }
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree with all the Terms and Conditions stated by Nile"
               />
             </Grid>

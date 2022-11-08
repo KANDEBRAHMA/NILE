@@ -39,7 +39,7 @@ const SearchEmployees = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, employeeData);
 
-  const url = "http://localhost:5000/";
+  const url = "https://azure-flask-nile.azurewebsites.net/";
 
   const fetchData = async () => {
     const response = await axios.get(`${url}/searchEmployees`);

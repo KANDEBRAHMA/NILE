@@ -14,7 +14,9 @@ const AdminApproveRequest = () => {
     fetchdata();
   }, []);
   const fetchdata = async () => {
-    const response = await axios.get("http://localhost:5000/getAdminDetails");
+    const response = await axios.get(
+      "https://azure-flask-nile.azurewebsites.net/getAdminDetails"
+    );
     //console.log(response.data.result);
     if (response.status === 200) {
       setData(response.data["result"]);
@@ -33,68 +35,72 @@ const AdminApproveRequest = () => {
   return (
     <div>
       <ToastContainer />
-      {
-        data === null ? (
-          <h1>Loading...</h1>
-        ) : Object.keys(data).length === 0 ? (
-          <p>No New Admins to Approve</p>
-        ) : (
-          Object.keys(data).map((obj, i) => {
-            return (
-              <div key={i} className="admins">
-                <div className="adminName">
-                  <h1>{data[obj].FirstName + " " + data[obj].LastName}</h1>
-                  <p>{data[obj].username} </p>{" "}
-                </div>
-                <div>
-                  <Button
-                    variant="outlined"
-                    startIcon={<DeleteIcon />}
-                    onClick={() => {
-                      axios
-                        .post("http://localhost:5000/deleteAdmin", {
-                          username: data[obj].username,
-                        })
-                        .then((response) => {
-                          if (response.status === 200) {
-                            toast.success("Admin Deleted Sucessfully", {
-                              position: toast.POSITION.TOP_RIGHT,
-                              autoClose: 2000,
-                            });
-                          }
-                          window.location.reload(true);
-                        });
-                    }}
-                  >
-                    Delete Admin
-                  </Button>{" "}
-                  <Button
-                    variant="outlined"
-                    startIcon={<VerifiedIcon />}
-                    onClick={() => {
-                      axios
-                        .post("http://localhost:5000/verifyAdmin", {
-                          username: data[obj].username,
-                        })
-                        .then((response) => {
-                          if (response.status === 200) {
-                            toast.success("Admin Verified Sucessfully", {
-                              position: toast.POSITION.TOP_RIGHT,
-                              autoClose: 2000,
-                            });
-                          }
-                          window.location.reload(true);
-                        });
-                    }}
-                  >
-                    Approve Admin
-                  </Button>
-                </div>
+      {data === null ? (
+        <h1>Loading...</h1>
+      ) : Object.keys(data).length === 0 ? (
+        <p>No New Admins to Approve</p>
+      ) : (
+        Object.keys(data).map((obj, i) => {
+          return (
+            <div key={i} className="admins">
+              <div className="adminName">
+                <h1>{data[obj].FirstName + " " + data[obj].LastName}</h1>
+                <p>{data[obj].username} </p>{" "}
               </div>
-            );
-          })
-        )
-      }
+              <div>
+                <Button
+                  variant="outlined"
+                  startIcon={<DeleteIcon />}
+                  onClick={() => {
+                    axios
+                      .post(
+                        "https://azure-flask-nile.azurewebsites.net/deleteAdmin",
+                        {
+                          username: data[obj].username,
+                        }
+                      )
+                      .then((response) => {
+                        if (response.status === 200) {
+                          toast.success("Admin Deleted Sucessfully", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: 2000,
+                          });
+                        }
+                        window.location.reload(true);
+                      });
+                  }}
+                >
+                  Delete Admin
+                </Button>{" "}
+                <Button
+                  variant="outlined"
+                  startIcon={<VerifiedIcon />}
+                  onClick={() => {
+                    axios
+                      .post(
+                        "https://azure-flask-nile.azurewebsites.net/verifyAdmin",
+                        {
+                          username: data[obj].username,
+                        }
+                      )
+                      .then((response) => {
+                        if (response.status === 200) {
+                          toast.success("Admin Verified Sucessfully", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: 2000,
+                          });
+                        }
+                        window.location.reload(true);
+                      });
+                  }}
+                >
+                  Approve Admin
+                </Button>
+              </div>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };
