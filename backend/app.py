@@ -19,26 +19,26 @@ import certifi
 import ssl
 
 load_dotenv()
-api = Flask(__name__)
-cors = CORS(api)
+app = Flask(__name__)
+cors = CORS(app)
 mysql = MySQL(cursorclass=DictCursor)
 
 #mysql configuration
-api.config['MYSQL_DATABASE_USER'] = os.getenv('MYSQL_DATABASE_USER')
-api.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_DATABASE_PASSWORD')
-api.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE_DB')
-api.config['MYSQL_DATABASE_HOST'] = os.getenv('MYSQL_DATABASE_HOST')
+app.config['MYSQL_DATABASE_USER'] = os.getenv('MYSQL_DATABASE_USER')
+app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_DATABASE_PASSWORD')
+app.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE_DB')
+app.config['MYSQL_DATABASE_HOST'] = os.getenv('MYSQL_DATABASE_HOST')
 
 # #email configuration
-api.config['MAIL_SERVER']= os.getenv('MAIL_SERVER')
-api.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
-api.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-api.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-api.config['MAIL_USE_TLS'] = False
-api.config['MAIL_USE_SSL'] = True
+app.config['MAIL_SERVER']= os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
-mail = Mail(api)
-mysql.init_app(api)
+mail = Mail(app)
+mysql.init_app(app)
 
 def lat_lon(address):
     ctx = ssl.create_default_context(cafile=certifi.where())
@@ -54,13 +54,13 @@ def generate_otp():
   return otp
 
 def send_email(message, email_id,subject):
-    smtpserver = smtplib.SMTP(api.config['MAIL_SERVER'], 587)
+    smtpserver = smtplib.SMTP(app.config['MAIL_SERVER'], 587)
     smtpserver.ehlo()
     smtpserver.starttls()
     smtpserver.ehlo()
-    smtpserver.login(api.config['MAIL_USERNAME'], api.config['MAIL_PASSWORD'])
+    smtpserver.login(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
     print(email_id)
-    msg = Message(subject, sender = api.config['MAIL_USERNAME'], recipients = [email_id])
+    msg = Message(subject, sender = app.config['MAIL_USERNAME'], recipients = [email_id])
     msg.html = message
     mail.send(msg)
     return "Message sent!"
@@ -88,8 +88,8 @@ def generateUserId(firstname, lastname):
         conn.close()
         return userid
 
-@api.route('/')
-@api.route('/profile')
+@app.route('/')
+@app.route('/profile')
 def my_profile():
     response_body = {
         "name": "Nile",
@@ -98,7 +98,7 @@ def my_profile():
     return response_body
 
 
-@api.route('/register',methods =['GET', 'POST'])
+@app.route('/register',methods =['GET', 'POST'])
 def register():
     # print("Here")
     try:
@@ -126,7 +126,7 @@ def register():
         return jsonify(e)
 
 
-@api.route('/login',methods = ['POST'])
+@app.route('/login',methods = ['POST'])
 def login():
     try:
         if request.method == 'POST':
@@ -164,7 +164,7 @@ def login():
     except Exception as e:
         return jsonify(e)
 
-@api.route('/forgotpassword/<string:username>',methods = ['GET','POST'])
+@app.route('/forgotpassword/<string:username>',methods = ['GET','POST'])
 def forgotpassword(username : str):
     if request.method == 'GET':
         conn,cursor = db_connect()
@@ -202,7 +202,7 @@ def forgotpassword(username : str):
             return jsonify({'response':205,'msg':'User doesnot exist'})    
 
 
-@api.route('/updatepassword/<string:username>',methods=['POST'])
+@app.route('/updatepassword/<string:username>',methods=['POST'])
 def update_password(username: str):
     try:
         if request.method == 'POST':
@@ -229,11 +229,11 @@ def update_password(username: str):
     except Exception as e:
         return jsonify(e)
 
-@api.route("/email")
+@app.route("/email")
 def index():
     return send_email("Welcome to Nile Delivery Service",'harishanker.kande@gmail.com','Welcome!')
 
-@api.route('/searchEmployees',methods=["GET"])
+@app.route('/searchEmployees',methods=["GET"])
 def searchEmployees():
     try:
         conn,cursor = db_connect()
@@ -248,7 +248,7 @@ def searchEmployees():
     except Exception as e:
         print(e)
         
-@api.route('/availableDrivers',methods=["GET"])
+@app.route('/availableDrivers',methods=["GET"])
 def availableDrivers():
     try:
         conn,cursor = db_connect()
@@ -264,7 +264,7 @@ def availableDrivers():
         print(e)
         
         
-@api.route('/getAllOrders',methods=["GET"])
+@app.route('/getAllOrders',methods=["GET"])
 def getAllOrders():
     try:
         conn,cursor = db_connect()
@@ -279,7 +279,7 @@ def getAllOrders():
     except Exception as e:
         print(e)
         
-@api.route('/assignDriver',methods=["POST"])
+@app.route('/assignDriver',methods=["POST"])
 def assignDriver():
     try:
         print(request.json)
@@ -297,7 +297,7 @@ def assignDriver():
     except Exception as e:
         print(e)
         
-@api.route('/getAssignedOrders/<string:driveremail>',methods=["GET"])
+@app.route('/getAssignedOrders/<string:driveremail>',methods=["GET"])
 def getAssignedOrders(driveremail:str):
     try:
         conn,cursor = db_connect()
@@ -312,7 +312,7 @@ def getAssignedOrders(driveremail:str):
     except Exception as e:
         print(e)
 
-@api.route('/getAdminDetails',methods = ['GET','POST'])
+@app.route('/getAdminDetails',methods = ['GET','POST'])
 def getAdminDetails():
     try:
         if request.method == 'GET':
@@ -324,7 +324,7 @@ def getAdminDetails():
     except Exception as e:
         print(e)
 
-@api.route('/deleteAdmin', methods = ['POST'])
+@app.route('/deleteAdmin', methods = ['POST'])
 def deleteAdmin():
     try:
         if request.method == 'POST':
@@ -337,7 +337,7 @@ def deleteAdmin():
     except Exception as e:
         print(e)
 
-@api.route('/verifyAdmin', methods = ['POST'])
+@app.route('/verifyAdmin', methods = ['POST'])
 def verifyAdmin():
     try:
         if request.method == 'POST':
@@ -352,7 +352,7 @@ def verifyAdmin():
         print(e)
 
 
-@api.route("/updateUserProfile/<string:username>",methods=["GET","POST"])
+@app.route("/updateUserProfile/<string:username>",methods=["GET","POST"])
 def updateUserProfile(username:str):
     # print(request.method)
     if request.method == 'GET':
@@ -388,7 +388,7 @@ def updateUserProfile(username:str):
             conn.close()
             return jsonify({'response':205,'username':username,'message':'User not exists'})
         
-@api.route('/addService',methods=["POST"])
+@app.route('/addService',methods=["POST"])
 def addService():
     try:
         conn,cursor = db_connect()
@@ -404,7 +404,7 @@ def addService():
     except Exception as e:
         print(e)
 
-@api.route('/getServices',methods=["GET"])
+@app.route('/getServices',methods=["GET"])
 def getServices():
     try:
         if request.method == 'GET':
@@ -420,7 +420,7 @@ def getServices():
     except Exception as e:
         print(e)
 
-@api.route('/updateServicePrice',methods=["POST"])
+@app.route('/updateServicePrice',methods=["POST"])
 def updateServicePrice():
     try:
         if request.method == 'POST':
@@ -439,11 +439,11 @@ def updateServicePrice():
     except Exception as e:
         print(e)
 
-@api.route('/getLatLon')
+@app.route('/getLatLon')
 def getLatLon():
     return lat_lon('Bloomington,Indiana')
 
-@api.route('/getDeliveredOrders')
+@app.route('/getDeliveredOrders')
 def getDeliveredOrders():
     try:
         conn,cursor = db_connect()
@@ -458,7 +458,7 @@ def getDeliveredOrders():
     except Exception as e:
         print(e)
 
-@api.route('/deleteServices',methods=["POST"])
+@app.route('/deleteServices',methods=["POST"])
 def deleteServices():
     try:
         if request.method == "POST":
@@ -477,4 +477,4 @@ def deleteServices():
 
 
 if __name__ == "__main__":
-    api.run()
+    app.run()
