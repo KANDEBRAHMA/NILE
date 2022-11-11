@@ -31,7 +31,7 @@ const ForgotPassword = () => {
     });
     axios
       .get(
-        `https://azure-flask-nile.azurewebsites.net/forgotpassword/${data.get(
+        `https://azure-nile-backend.azurewebsites.net/forgotpassword/${data.get(
           "username"
         )}`
       )
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
     });
     axios
       .post(
-        `https://azure-flask-nile.azurewebsites.net/forgotpassword/${data.get(
+        `https://azure-nile-backend.azurewebsites.net/forgotpassword/${data.get(
           "username"
         )}`,
         {
@@ -84,7 +84,7 @@ const ForgotPassword = () => {
     });
     axios
       .post(
-        `https://azure-flask-nile.azurewebsites.net/updatepassword/${useremail}`,
+        `https://azure-nile-backend.azurewebsites.net/updatepassword/${useremail}`,
         {
           newpassword: data.get("password"),
         }

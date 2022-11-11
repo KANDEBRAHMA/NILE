@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const AssignDriver = ({ data }) => {
   // console.log("Assigned driver data is",data)
   const [drivers, setDrivers] = useState("");
-  const url = "https://azure-flask-nile.azurewebsites.net/";
+  const url = "https://azure-nile-backend.azurewebsites.net/";
 
   const fetchDrivers = async () => {
     const availableDrivers = await axios.get(`${url}/availableDrivers`);

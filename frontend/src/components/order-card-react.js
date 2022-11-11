@@ -65,7 +65,7 @@ const CardDisplay = ({ data }) => {
 
 const OrderCard = () => {
   const [orders, setOrders] = React.useState({});
-  const url = "https://azure-flask-nile.azurewebsites.net";
+  const url = "https://azure-nile-backend.azurewebsites.net";
 
   const fetchAllOrders = async () => {
     const allOrders = await axios.get(`${url}/getAllOrders`);

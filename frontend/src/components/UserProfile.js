@@ -15,7 +15,7 @@ import convertToBase64 from "../pages/ConvertToBase64";
 import "../css/user-profile.css";
 
 const theme = createTheme();
-const url = "https://azure-flask-nile.azurewebsites.net";
+const url = "https://azure-nile-backend.azurewebsites.net";
 const UserProfile = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);

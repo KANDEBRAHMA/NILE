@@ -2,7 +2,7 @@
   "name": "nile",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://azure-flask-nile.azurewebsites.net/",
+  "proxy": "https://azure-nile-backend.azurewebsites.net/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",

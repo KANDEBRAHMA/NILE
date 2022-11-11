@@ -79,7 +79,7 @@ const SignIn = () => {
       alert("invalid email");
     }
     axios
-      .post("https://azure-flask-nile.azurewebsites.net/login", {
+      .post("https://azure-nile-backend.azurewebsites.net/login", {
         email: data.get("email"),
         password: data.get("password"),
       })

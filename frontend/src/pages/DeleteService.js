@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const theme = createTheme();
-const url = "https://azure-flask-nile.azurewebsites.net";
+const url = "https://azure-nile-backend.azurewebsites.net";
 
 const CardDisplay = ({ data }) => {
   const [serviceName, setServiceName] = useState(null);

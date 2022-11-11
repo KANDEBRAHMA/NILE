@@ -33,7 +33,7 @@ export default function SignUp() {
       answer: data.get("securityAnswer"),
     });
     axios
-      .post("https://azure-flask-nile.azurewebsites.net/register", {
+      .post("https://azure-nile-backend.azurewebsites.net/register", {
         email: data.get("email"),
         password: data.get("password"),
         firstname: data.get("firstName"),

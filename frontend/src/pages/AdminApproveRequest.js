@@ -15,7 +15,7 @@ const AdminApproveRequest = () => {
   }, []);
   const fetchdata = async () => {
     const response = await axios.get(
-      "https://azure-flask-nile.azurewebsites.net/getAdminDetails"
+      "https://azure-nile-backend.azurewebsites.net/getAdminDetails"
     );
     //console.log(response.data.result);
     if (response.status === 200) {
@@ -54,7 +54,7 @@ const AdminApproveRequest = () => {
                   onClick={() => {
                     axios
                       .post(
-                        "https://azure-flask-nile.azurewebsites.net/deleteAdmin",
+                        "https://azure-nile-backend.azurewebsites.net/deleteAdmin",
                         {
                           username: data[obj].username,
                         }
@@ -78,7 +78,7 @@ const AdminApproveRequest = () => {
                   onClick={() => {
                     axios
                       .post(
-                        "https://azure-flask-nile.azurewebsites.net/verifyAdmin",
+                        "https://azure-nile-backend.azurewebsites.net/verifyAdmin",
                         {
                           username: data[obj].username,
                         }

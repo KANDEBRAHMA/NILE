@@ -11,7 +11,7 @@ const DriverLanding = () => {
   }, []);
 
   const [assignedOrders, setAssignedOrders] = React.useState({});
-  const url = "https://azure-flask-nile.azurewebsites.net/";
+  const url = "https://azure-nile-backend.azurewebsites.net/";
 
   const fetchAssignedOrders = async () => {
     const email = window.localStorage.getItem("email");

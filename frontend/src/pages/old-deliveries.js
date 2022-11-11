@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const OldDeliveries = () => {
-  const url = "https://azure-flask-nile.azurewebsites.net";
+  const url = "https://azure-nile-backend.azurewebsites.net";
   const [orders, setOrders] = useState([]);
   const fetchOrders = async () => {
     const response = await axios.get(`${url}/getDeliveredOrders`);
