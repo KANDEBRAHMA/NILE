@@ -8,7 +8,7 @@ import PackageDetails from "./PackageDetails";
 import ShippingDetails from "./ShippingDetails";
 
 const ProgressBar = () => {
-  const url = "http://localhost:5000";
+  const url = "https://azure-nile-backend.azurewebsites.net";
   const [selectedService, setselectedService] = useState(null);
   const [formData, setFormData] = useState({
     emailsender: "",

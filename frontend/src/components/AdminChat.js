@@ -12,7 +12,7 @@ const AdminChat = () => {
   const [message, setMessage] = useState(null);
   const [reply, setReply] = useState(null);
   const [name, setName] = useState("hkande");
-  const url = "http://localhost:5000";
+  const url = "https://azure-nile-backend.azurewebsites.net";
   const username = "hkande";
   const admin = "admin";
 

@@ -8,7 +8,7 @@ const MyChatComponent = ({ adminDetails }) => {
 
   // wait for TalkJS to load
   const [talkLoaded, markTalkLoaded] = useState(false);
-  const url = "http://localhost:5000";
+  const url = "https://azure-nile-backend.azurewebsites.net";
 
   useEffect(() => {
     Talk.ready.then(() => markTalkLoaded(true));

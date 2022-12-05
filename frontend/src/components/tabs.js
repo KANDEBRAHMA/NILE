@@ -58,7 +58,7 @@ export default function BasicTabs() {
 
   const getTrackingDetails = async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/tracking",
+      "https://azure-nile-backend.azurewebsites.net/tracking",
       formData
     );
     if (response.status === 200) {

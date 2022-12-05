@@ -16,7 +16,7 @@ import "../css/signup.css";
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const url = "http://localhost:5000";
+  const url = "https://azure-nile-backend.azurewebsites.net";
   const register = async (data) => {
     const response = await axios.post(`${url}/register`, {
       email: data.get("email"),
@@ -35,7 +35,7 @@ export default function SignUp() {
     }
 
     // axios
-    //   .post("http://localhost:5000/register", {
+    //   .post("https://azure-nile-backend.azurewebsites.net/register", {
     //     email: data.get("email"),
     //     password: data.get("password"),
     //     firstname: data.get("firstName"),
