@@ -2,7 +2,6 @@ import "../css/admin-landing.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from "react";
-import SupportGroupChat from "../Talk/SupportGroupChat";
 
 const routes = {
   "Assign Delivery": "/assign-delivery",
