@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const AssignDriver = ({ data }) => {
   // console.log("Assigned driver data is",data)
   const [drivers, setDrivers] = useState("");
-  const url = "https://azure-nile-backend.azurewebsites.net/";
+  const url = "http://localhost:5000/";
 
   const fetchDrivers = async () => {
     const availableDrivers = await axios.get(`${url}/availableDrivers`);
@@ -25,7 +25,7 @@ const AssignDriver = ({ data }) => {
     fetchDrivers();
   }, []);
   return (
-    <div className="container">
+    <div className="assign-driver-container">
       <ToastContainer />
       {Object.keys(drivers).map((key, value) => {
         return (
@@ -42,6 +42,7 @@ const AssignDriver = ({ data }) => {
                   window.location.reload();
                 }
               }}
+              className="assign-button"
             >
               Assign
             </button>

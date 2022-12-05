@@ -16,6 +16,47 @@ import "../css/signup.css";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const url = "http://localhost:5000";
+  const register = async (data) => {
+    const response = await axios.post(`${url}/register`, {
+      email: data.get("email"),
+      password: data.get("password"),
+      firstname: data.get("firstName"),
+      lastname: data.get("lastName"),
+      role: data.get("userType"),
+      securityquestion: data.get("questions"),
+      answer: data.get("securityAnswer"),
+    });
+    if (response.status === 200) {
+      alert("User Registered Successfully");
+      navigate("/SignIn");
+    } else {
+      alert(response.data["message"]);
+    }
+
+    // axios
+    //   .post("http://localhost:5000/register", {
+    //     email: data.get("email"),
+    //     password: data.get("password"),
+    //     firstname: data.get("firstName"),
+    //     lastname: data.get("lastName"),
+    //     role: data.get("userType"),
+    //     securityquestion: data.get("questions"),
+    //     answer: data.get("securityAnswer"),
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.data["response"] === 205) {
+    //       alert(response.data["message"]);
+    //     } else if (response.data["response"] === "200") {
+    //       alert("User Registered Successfully");
+    //       navigate("/SignIn");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -32,28 +73,7 @@ export default function SignUp() {
       securityquestion: data.get("questions"),
       answer: data.get("securityAnswer"),
     });
-    axios
-      .post("https://azure-nile-backend.azurewebsites.net/register", {
-        email: data.get("email"),
-        password: data.get("password"),
-        firstname: data.get("firstName"),
-        lastname: data.get("lastName"),
-        role: data.get("userType"),
-        securityquestion: data.get("questions"),
-        answer: data.get("securityAnswer"),
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data["response"] === 205) {
-          alert(response.data["message"]);
-        } else if (response.data["response"] === "200") {
-          alert("User Registered Successfully");
-          navigate("/SignIn");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    register(data);
   };
 
   const [type, setAccess] = React.useState("");
@@ -77,7 +97,7 @@ export default function SignUp() {
           alignItems: "center",
         }}
       >
-        <div className="signup-title">Sign up</div>
+        <div className="signup-title">Sign Up</div>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -182,6 +202,7 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
+                style={{ paddingBottom: "0.5rem" }}
                 required
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree with all the Terms and Conditions stated by Nile"
@@ -193,6 +214,7 @@ export default function SignUp() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            className="signin-button az"
           >
             Sign Up
           </Button>

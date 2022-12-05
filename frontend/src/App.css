@@ -33,3 +33,11 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  display: flex;
+  width: 100%;
+  min-height: calc(100% - 3.5rem);
+  flex-direction: column;
+  /* align-items: center; */
+}

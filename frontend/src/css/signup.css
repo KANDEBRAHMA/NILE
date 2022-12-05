@@ -1,32 +1,34 @@
 .signup-container {
-    margin: 2rem;
-    padding: 1rem;
+  margin-top: 4rem;
+  font-family: "Inter", sans-serif !important;
+  font-weight: 400 !important;
+  max-width: 35rem;
+  border: 2px solid #5038ee;
+  padding: 2rem;
+  margin-left: 4rem;
 }
 
-h1 {
-    font-family: 'Poppins', sans-serif !important;
-}
-
-.css-binzgt {
-    max-width: 50rem;
-}
-a,li {
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 1rem !important;
+a,
+li {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  text-decoration: none !important;
 }
 
 .signup-title {
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 400 !important;
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
-.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
-    color: #5038ee !important;
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #5038ee !important;
 }
 
-.already, .already>a{
-    padding-top: 1rem;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 1.5rem !important;
+.az {
+  display: flex;
+}
+
+input,
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  font-family: "Inter", sans-serif !important;
 }

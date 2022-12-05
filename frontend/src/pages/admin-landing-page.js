@@ -1,7 +1,8 @@
 import "../css/admin-landing.css";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
+import SupportGroupChat from "../Talk/SupportGroupChat";
 
 const routes = {
   "Assign Delivery": "/assign-delivery",
@@ -9,6 +10,7 @@ const routes = {
   "Modify Services and Prices": "/modifyservices",
   "View All Employees": "/search-employees",
   "Approve Pending Admin Requests": "/admin",
+  "Address Customer issues": "/support",
 };
 
 const AdminLandingPage = () => {
@@ -18,7 +20,7 @@ const AdminLandingPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="landing-container">
       <h1 className="welcome-message">Welcome Admin</h1>
       <h3>Please select the actions which you want to perform</h3>
       {Object.keys(routes).map((keyName, route) => (
@@ -28,6 +30,7 @@ const AdminLandingPage = () => {
           </li>
         </div>
       ))}
+      {/* <SupportGroupChat /> */}
     </div>
   );
 };

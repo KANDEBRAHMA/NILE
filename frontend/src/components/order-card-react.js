@@ -32,18 +32,17 @@ const CardDisplay = ({ data }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 800 }}>
       <CardHeader
         title={`Order Id:${data.OrderId}`}
-        subheader={`date:${data.OrderPlacedDate}`}
+        subheader={`Date:${data.OrderPlacedDate}`}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <div>Sender Name: {data.SenderName}</div>
-          <div>Receiver Name: {data.ReceiverName}</div>
-          <div>Service Type: {data.ServiceType}</div>
-          <div>Destination Address: {data.DestinationAddress}</div>
-          {/* {data.senderName} */}
+        <Typography variant="body2" color="text.secondary" className="content">
+          <p>Sender Name: {data.SenderName}</p>
+          <p>Receiver Name: {data.ReceiverName}</p>
+          <p>Service Type: {data.ServiceType}</p>
+          <p>Destination Address: {data.DestinationAddress}</p>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -65,7 +64,7 @@ const CardDisplay = ({ data }) => {
 
 const OrderCard = () => {
   const [orders, setOrders] = React.useState({});
-  const url = "https://azure-nile-backend.azurewebsites.net";
+  const url = "http://localhost:5000/";
 
   const fetchAllOrders = async () => {
     const allOrders = await axios.get(`${url}/getAllOrders`);
@@ -75,10 +74,10 @@ const OrderCard = () => {
     if (allOrders.status === 200) {
       setOrders(allOrders.data);
     } else {
-      toast.error(allOrders.message, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
+      // toast.error(allOrders.message, {
+      //     position: toast.POSITION.TOP_RIGHT,
+      //     autoClose: 2000,
+      // });
     }
   };
 
@@ -90,7 +89,11 @@ const OrderCard = () => {
     <div>
       <ToastContainer />
       {Object.keys(orders).map((key, value) => {
-        return <CardDisplay data={orders[key]} key={value}></CardDisplay>;
+        return (
+          <div style={{ paddingBottom: "1rem" }}>
+            <CardDisplay data={orders[key]} key={value}></CardDisplay>
+          </div>
+        );
       })}
     </div>
   );

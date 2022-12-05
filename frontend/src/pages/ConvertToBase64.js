@@ -7,7 +7,7 @@ export default function convertToBase64(file) {
       resolve(fileReader.result);
     };
     fileReader.onerror = () => {
-      reject(error);
+      // reject(error);
     };
   });
 }

@@ -1,51 +1,60 @@
-import mapboxgl from "mapbox-gl";
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import mapboxgl from "!mapbox-gl";
 import "../css/maps.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
 
-const Marker = ({ onClick, children, feature }) => {
-  const _onClick = () => {
-    onClick(feature.properties.description);
-  };
-
-  return <button onClick={_onClick}>{children}</button>;
-};
-
-const Map = () => {
+const Maps = (props) => {
   const mapContainerRef = useRef(null);
+  const { latlongs } = props;
 
   // Initialize map when component mounts
+  console.log(latlongs);
   useEffect(() => {
+    console.log(latlongs);
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-87.6244212, 41.8755616],
-      zoom: 12,
+      style: "mapbox://styles/mapbox/streets-v12",
+      center:
+        latlongs === [undefined, undefined]
+          ? latlongs
+          : [-87.629799, 41.878113],
+      zoom: 9,
     });
 
-    const sourceMarker = new mapboxgl.Marker()
-      .setLngLat([-87.6244212, 41.8755616])
-      .addTo(map);
+    // latlongs.forEach((latlong) => {
+    //   new mapboxgl.Marker().setLngLat(latlong).addTo(map);
+    // });
 
-    // Create a default Marker, colored black, rotated 45 degrees.
-    const destinationMarker = new mapboxgl.Marker({ color: "black" })
-      .setLngLat([-87.6930459, 42.0447388])
-      .addTo(map);
+    map.on("load", () => {
+      setMap(map);
+      map.resize();
+    });
 
-    // Add navigation control (the +/- zoom buttons)
-    // map.addControl(new mapboxgl.NavigationControl(), "top-right");
+    [[-86.536659, 39.168804]].map((loc) => {
+      // console.log(loc);
+      new mapboxgl.Marker().setLngLat(loc).addTo(map);
+    });
 
     // Clean up on unmount
     return () => map.remove();
   }, []);
 
-  const markerClicked = (title) => {
-    window.alert(title);
-  };
+  return (
+    <div>
+      <div ref={mapContainerRef} className="map-container" />
+    </div>
+  );
+};
 
-  return <div className="map" ref={mapContainerRef}></div>;
+const Map = (props) => {
+  const { latlongs } = props;
+  return (
+    <div>
+      <Maps latlongs={latlongs}></Maps>
+    </div>
+  );
 };
 
 export default Map;

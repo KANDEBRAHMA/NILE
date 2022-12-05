@@ -14,9 +14,7 @@ const AdminApproveRequest = () => {
     fetchdata();
   }, []);
   const fetchdata = async () => {
-    const response = await axios.get(
-      "https://azure-nile-backend.azurewebsites.net/getAdminDetails"
-    );
+    const response = await axios.get("http://localhost:5000/getAdminDetails");
     //console.log(response.data.result);
     if (response.status === 200) {
       setData(response.data["result"]);
@@ -33,7 +31,7 @@ const AdminApproveRequest = () => {
   };
 
   return (
-    <div>
+    <div style={{ margin: "2rem" }}>
       <ToastContainer />
       {data === null ? (
         <h1>Loading...</h1>
@@ -53,12 +51,9 @@ const AdminApproveRequest = () => {
                   startIcon={<DeleteIcon />}
                   onClick={() => {
                     axios
-                      .post(
-                        "https://azure-nile-backend.azurewebsites.net/deleteAdmin",
-                        {
-                          username: data[obj].username,
-                        }
-                      )
+                      .post("http://localhost:5000/deleteAdmin", {
+                        username: data[obj].username,
+                      })
                       .then((response) => {
                         if (response.status === 200) {
                           toast.success("Admin Deleted Sucessfully", {
@@ -77,12 +72,9 @@ const AdminApproveRequest = () => {
                   startIcon={<VerifiedIcon />}
                   onClick={() => {
                     axios
-                      .post(
-                        "https://azure-nile-backend.azurewebsites.net/verifyAdmin",
-                        {
-                          username: data[obj].username,
-                        }
-                      )
+                      .post("http://localhost:5000/verifyAdmin", {
+                        username: data[obj].username,
+                      })
                       .then((response) => {
                         if (response.status === 200) {
                           toast.success("Admin Verified Sucessfully", {

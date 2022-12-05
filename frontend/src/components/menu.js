@@ -19,14 +19,10 @@ import { useNavigate } from "react-router-dom";
 import "../css/menu.css";
 
 const pages = [
-  "Shipping",
-  "Tracking",
   "Location",
   "SignIn",
-  "SignUp",
-  "Support",
-];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  "SignUp"
+]
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -61,7 +57,7 @@ const ResponsiveAppBar = () => {
   const onLogout = () => {
     whereToRoute("/");
     localStorage.clear();
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
@@ -168,7 +164,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Options">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/assets/sheba.jpeg" />
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -187,10 +183,21 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={() => whereToRoute("/userProfile")}>
-                Profile
-              </MenuItem>
-              <MenuItem onClick={() => onLogout()}>Logout</MenuItem>
+              {console.log(localStorage.getItem("isLoggedIn"))}
+              {localStorage.getItem("isLoggedIn") ? (
+                <>
+                  <MenuItem onClick={() => whereToRoute("/userProfile")}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={() => onLogout()}>Logout</MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem onClick={() => whereToRoute("/SignIn")}>
+                    Sign In
+                  </MenuItem>
+                </>
+              )}
             </Menu>
           </Box>
         </Toolbar>

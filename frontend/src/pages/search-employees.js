@@ -29,8 +29,8 @@ const filterData = (query, data) => {
   if (!query) {
     return data;
   } else {
-    console.log(data.filter((d) => d.FullName.toLowerCase().includes(query)));
-    return data.filter((d) => d.FullName.toLowerCase().includes(query));
+    // console.log(data.filter((d) => d.FullName.includes(query)));
+    return data.filter((d) => d.FullName.includes(query));
   }
 };
 
@@ -39,7 +39,7 @@ const SearchEmployees = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, employeeData);
 
-  const url = "https://azure-nile-backend.azurewebsites.net/";
+  const url = "http://localhost:5000/";
 
   const fetchData = async () => {
     const response = await axios.get(`${url}/searchEmployees`);
@@ -65,17 +65,21 @@ const SearchEmployees = () => {
         justifyContent: "center",
         flexDirection: "column",
         padding: 20,
+        margin: "2rem",
       }}
     >
       <ToastContainer />
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <div style={{ padding: 3, alignItems: "center" }}>
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        style={{ marginBottom: "1rem" }}
+      />
+      <div style={{ padding: 3, alignItems: "center", margin: "2rem" }}>
         {console.log(dataFiltered)}
         {Object.keys(dataFiltered).map((key, value) => {
           return (
-            <div>
-              <b>{dataFiltered[key].FullName}</b>
-              <p>{dataFiltered[key].Role}</p>
+            <div style={{ paddingBottom: "2rem" }}>
+              {dataFiltered[key].FullName + ": " + dataFiltered[key].Role}
             </div>
           );
         })}

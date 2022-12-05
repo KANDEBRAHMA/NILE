@@ -3,11 +3,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +12,7 @@ import convertToBase64 from "../pages/ConvertToBase64";
 import "../css/user-profile.css";
 
 const theme = createTheme();
-const url = "https://azure-nile-backend.azurewebsites.net";
+const url = "http://localhost:5000";
 const UserProfile = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -84,20 +81,19 @@ const UserProfile = () => {
 
   return (
     <div className="main-container">
-      <h1>Update User Profile</h1>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      <div style={{ width: "50%", marginLeft: "25rem" }}>
+        <h1 className="profile-heading">Update User Profile</h1>
         <ToastContainer />
+      </div>
+      <div style={{ width: "50%", marginLeft: "25rem" }}>
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: "2rem",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
           }}
         >
           <Box
-            className="boxstyles"
             component="form"
             noValidate
             sx={{ mt: 3 }}
@@ -122,6 +118,7 @@ const UserProfile = () => {
                   onChange={(event) => setFirstName(event.target.value)}
                   label="First Name"
                   autoFocus
+                  variant="standard"
                 />
               </Grid>
               <Grid item xs={8}>
@@ -134,6 +131,7 @@ const UserProfile = () => {
                   onChange={(event) => setLastName(event.target.value)}
                   name="lastName"
                   autoComplete="family-name"
+                  variant="standard"
                 />
               </Grid>
               <Grid item xs={8}>
@@ -152,6 +150,7 @@ const UserProfile = () => {
                   }}
                   name="email"
                   autoComplete="email"
+                  variant="standard"
                 />
               </Grid>
               <Grid item xs={8}>
@@ -163,6 +162,7 @@ const UserProfile = () => {
                   onChange={(event) => setPassword(event.target.value)}
                   type="password"
                   autoComplete="new-password"
+                  variant="standard"
                 />
               </Grid>
               <Grid item xs={8}>
@@ -190,7 +190,7 @@ const UserProfile = () => {
             </Grid>
           </Box>
         </Box>
-      </Container>
+      </div>
     </div>
   );
 };
