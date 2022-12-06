@@ -10,10 +10,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const [questions, setQuestion] = React.useState("");
   const [resetPasswordEnable, setResetPasswordEnable] = React.useState(false);
   const [useremail, setUseremail] = React.useState("");
@@ -92,6 +94,7 @@ const ForgotPassword = () => {
       .then((response) => {
         if (response.data["response"] === 200) {
           alert("password updated successfully");
+          navigate("/SignIn");
         }
       })
       .catch((err) => {
