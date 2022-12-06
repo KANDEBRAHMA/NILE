@@ -22,7 +22,7 @@ export default function Modal() {
       position: toast.POSITION.TOP_RIGHT,
       autoClose: 2000,
     });
-    window.location.reload();
+    // window.location.reload();
   };
 
   if (modal) {
