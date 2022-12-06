@@ -12,6 +12,8 @@
 }
 
 .map-container {
+  display: flex;
+  margin-left: 6rem;
   width: 70vh;
   height: 70vh;
 }

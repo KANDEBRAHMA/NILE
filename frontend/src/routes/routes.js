@@ -25,6 +25,7 @@ import UserLandingPage from "../pages/user-landing-page";
 import GroupChat from "../Talk/GroupChat";
 import Rates from "../pages/Rates";
 import AdminChat from "../components/AdminChat";
+import MapRender from "../components/MapRender";
 
 function UserRoutes() {
   return (
@@ -39,6 +40,8 @@ function UserRoutes() {
       <Route exact path="/createShipment" element={<ProgressBar />} />
       <Route exact path="/myOrders" element={<Modal />} />
       <Route exact path="/rates" element={<Rates />} />
+      <Route exact path="/location" element={<Locations />} />
+      <Route exact path="/map" element={<MapRender />} />
     </Routes>
   );
 }
@@ -55,6 +58,7 @@ function DriverRoutes() {
       <Route exact path="/Location" element={<Map />} />
       <Route exact path="/assignedOrders" element={<DriverLanding />} />
       <Route exact path="/rates" element={<Rates />} />
+      <Route exact path="/location" element={<Locations />} />
     </Routes>
   );
 }
@@ -76,6 +80,7 @@ function AdminRoutes() {
       <Route exact path="/createShipment" element={<ProgressBar />} />
       <Route exact path="/rates" element={<Rates />} />
       <Route exact path="/chat" element={<AdminChat />} />
+      <Route exact path="/location" element={<Locations />} />
     </Routes>
   );
 }

@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Locations = () => {
   const url = "https://azure-nile-backend.azurewebsites.net";
@@ -72,12 +73,23 @@ const Locations = () => {
                   setSelecteddiv(loc);
                 }}
               >
-                <h1>{loc.storeName}</h1>
-                <p>Store Timings: {loc.storeTimings}</p>
-                <p>Address:{loc.storeAddress}</p>
-                <p>Latitude:{loc.storeLat}</p>
-                <p>Longitude:{loc.storeLon}</p>
-                <p>ZipCode:{loc.zipcode}</p>
+                <Link
+                  to="/map"
+                  state={{
+                    from: "locations",
+                    idx: idx,
+                    storeAddress: data[idx].storeAddress,
+                    latitude: data[idx].storeLat,
+                    longitude: data[idx].storeLon,
+                  }}
+                >
+                  <h1>{loc.storeName}</h1>
+                  <p>Store Timings: {loc.storeTimings}</p>
+                  <p>Address:{loc.storeAddress}</p>
+                  <p>Latitude:{loc.storeLat}</p>
+                  <p>Longitude:{loc.storeLon}</p>
+                  <p>ZipCode:{loc.zipcode}</p>
+                </Link>
               </div>
             );
           })}

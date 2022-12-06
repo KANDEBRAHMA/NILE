@@ -108,6 +108,7 @@ const UserProfile = () => {
                 )}
               </Grid>
               <Grid item xs={8}>
+                <b>First Name</b>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
@@ -116,17 +117,18 @@ const UserProfile = () => {
                   id="firstName"
                   value={firstName}
                   onChange={(event) => setFirstName(event.target.value)}
-                  label="First Name"
+                  // label="First Name"
                   autoFocus
                   variant="standard"
                 />
               </Grid>
               <Grid item xs={8}>
+                <b>Last Name</b>
                 <TextField
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  // label="Last Name"
                   value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
                   name="lastName"
@@ -135,11 +137,12 @@ const UserProfile = () => {
                 />
               </Grid>
               <Grid item xs={8}>
+                <b>Email</b>
                 <TextField
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  // label="Email Address"
                   value={email}
                   readOnly="true"
                   onChange={() => {
@@ -154,11 +157,12 @@ const UserProfile = () => {
                 />
               </Grid>
               <Grid item xs={8}>
+                <b>Password</b>
                 <TextField
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  // label="Password"
                   onChange={(event) => setPassword(event.target.value)}
                   type="password"
                   autoComplete="new-password"
