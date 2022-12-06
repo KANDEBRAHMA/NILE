@@ -94,9 +94,9 @@ const Locations = () => {
             );
           })}
         </div>
-        <div className="map-div">
+        {/* <div className="map-div">
           <Map latlongs={[selecteddiv.storeLon, selecteddiv.storeLat]} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
