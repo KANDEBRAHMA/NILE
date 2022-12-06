@@ -59,6 +59,7 @@ function DriverRoutes() {
       <Route exact path="/assignedOrders" element={<DriverLanding />} />
       <Route exact path="/rates" element={<Rates />} />
       <Route exact path="/location" element={<Locations />} />
+      <Route exact path="/map" element={<MapRender />} />
     </Routes>
   );
 }
@@ -81,6 +82,7 @@ function AdminRoutes() {
       <Route exact path="/rates" element={<Rates />} />
       <Route exact path="/chat" element={<AdminChat />} />
       <Route exact path="/location" element={<Locations />} />
+      <Route exact path="/map" element={<MapRender />} />
     </Routes>
   );
 }
@@ -102,6 +104,7 @@ function NormalRoutes() {
       <Route exact path="/location" element={<Locations />} />
       <Route exact path="/Payment" element={<Payment />}></Route>
       <Route exact path="/rates" element={<Rates />} />
+      <Route exact path="/map" element={<MapRender />} />
       {/* <Route exact path="/Tracking" element={<GoogleLocation />}></Route> */}
     </Routes>
   );
